@@ -1,13 +1,16 @@
 import React from 'react';
-import './App.css';
-import Nav from './components/nav';
+// import './App.css';
+import { Header } from './components/layout/Header';
+import { Content } from './components/layout/Content';
+// import { Nav } from './components/layout/Nav';
+import { List } from './components/pantry';
 
-function App() {
+export const App = () => {
   return (
     <div className="App">
-      <Nav />
+      <Header />
+      <Content />
+      {/* <List /> */}
     </div>
   );
-}
-
-export default App;
+};
