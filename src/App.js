@@ -4,13 +4,17 @@ import { Header } from './components/layout/Header';
 import { Content } from './components/layout/Content';
 // import { Nav } from './components/layout/Nav';
 import { List } from './components/pantry';
+import IngredientsContextProvider from './context/IngredientsContext';
 
 export const App = () => {
   return (
     <div className="App">
-      <Header />
-      <Content />
-      {/* <List /> */}
+      <IngredientsContextProvider>
+        <Header />
+        <Content />
+
+      </IngredientsContextProvider>
+
     </div>
   );
 };

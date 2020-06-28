@@ -25,11 +25,15 @@ export const List = () => {
 
 // input field for name of ingredient - search lookup field api
 // search lookup api - can this return measures? ml for liquids, or g for solids? lbs, cups etc too?
-const ListItemForm = () => {};
+const ListItemForm = () => { };
 
 // contains item, quantity and measure.
 // increase quantity, decrease quantity, remove buttons, edit?
 // could listItem and ListItemForm be the same comp?
 const ListItem = () => {
-  return <h1>List Item goes here</h1>;
+  return (
+    <div>
+      <input></input>
+    </div>
+  )
 };

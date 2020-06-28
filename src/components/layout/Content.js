@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 // import { Sidebar } from './Sidebar';
 import { IngredientList } from '../IngredientList';
+import IngredientsContextProvider, { IngredientsContext } from '../../context/IngredientsContext';
+
 
 export const Content = () => {
+  const { ingredients } = useContext(IngredientsContext);
   return (
-    <section>
-      {/* <Sidebar /> */}
-      <IngredientList />
-    </section>
+    <div>
+      <h1>Ingredients</h1>
+      <IngredientList ingredients={ingredients} />
+    </div>
   );
 };

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { firebase } from '../firebase';
+// import { firebase } from '../firebase';
 
 // const collatedPantry = () => {};
 
@@ -27,22 +27,22 @@ import { firebase } from '../firebase';
 export const useIngredients = () => {
   const [ingredients, setIngredients] = useState([]);
 
-  useEffect(() => {
-    firebase
-      .firestore()
-      .collection('pantry')
-      .where('userId', '==', '1')
-      .orderBy('ingredientId')
-      .get()
-      .then((snapshot) => {
-        const allIngredients = snapshot.docs.map((ingredient) => ({
-          ...ingredient.data(),
-          docId: ingredient.id,
-        }));
-        if (JSON.stringify(allIngredients) !== JSON.stringify(ingredients)) {
-          setIngredients(allIngredients);
-        }
-      });
-  }, [ingredients]);
+  // useEffect(() => {
+  //   firebase
+  //     .firestore()
+  //     .collection('pantry')
+  //     .where('userId', '==', '1')
+  //     .orderBy('ingredientId')
+  //     .get()
+  //     .then((snapshot) => {
+  //       const allIngredients = snapshot.docs.map((ingredient) => ({
+  //         ...ingredient.data(),
+  //         docId: ingredient.id,
+  //       }));
+  //       if (JSON.stringify(allIngredients) !== JSON.stringify(ingredients)) {
+  //         setIngredients(allIngredients);
+  //       }
+  //     });
+  // }, [ingredients]);
   return { ingredients, setIngredients };
 };

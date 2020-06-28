@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -7,10 +7,12 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import RestaurantIcon from '@material-ui/icons/Restaurant';
 import { Tab, Tabs } from '@material-ui/core';
+// import IngredientsContextProvider, { IngredientsContext } from '../../context/IngredientsContext';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    color: 'grey'
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -19,8 +21,10 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 2,
     textAlign: 'left',
   },
+
 }));
 export const Nav = () => {
+  // const { ingredients } = useContext(IngredientsContext);
   const classes = useStyles();
 
   return (
