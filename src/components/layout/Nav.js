@@ -12,7 +12,7 @@ import { Tab, Tabs } from '@material-ui/core';
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    color: 'grey'
+    color: 'grey',
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -21,7 +21,6 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 2,
     textAlign: 'left',
   },
-
 }));
 export const Nav = () => {
   // const { ingredients } = useContext(IngredientsContext);

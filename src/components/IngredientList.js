@@ -14,8 +14,12 @@ export const IngredientList = () => {
           <ul>
             {ingredients.map(ingredient => (
               <>
-                <Ingredient ingredient={ingredient} key={ingredient.id} />
-                <IngredientForm ingredient={ingredient} />
+                {
+                  ingredient.editing ?
+                    <IngredientForm ingredient={ingredient} />
+                    : <Ingredient ingredient={ingredient} key={ingredient.id} />
+                }
+
               </>
             ))}
           </ul>
@@ -24,8 +28,9 @@ export const IngredientList = () => {
           <div className='emptyPantry'>
             <h1>No Ingredients!</h1>
           </div>
-        )}
+        )
+      }
       <IngredientForm />
-    </div>
+    </div >
   )
 };

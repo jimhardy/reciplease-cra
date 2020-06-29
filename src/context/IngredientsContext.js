@@ -7,8 +7,8 @@ export const IngredientsContext = createContext();
 const IngredientsContextProvider = (props) => {
 
     const [ingredients, setIngredients] = useState([
-        { id: 1, name: 'rice', quantity: 500, measurement: 'grams', editing: false, timeStamp: 1593359651392 },
-        { id: 2, name: 'pasta', quantity: 500, measurement: 'grams', editing: false, timeStamp: 1593359651393 },
+        { id: uuidv4(), name: 'rice', quantity: 500, measurement: 'grams', editing: false, timeStamp: 1593359651392 },
+        { id: uuidv4(), name: 'pasta', quantity: 500, measurement: 'grams', editing: false, timeStamp: 1593359651393 },
     ]);
 
     const addIngredient = (name, quantity, measurement) => {
@@ -23,24 +23,27 @@ const IngredientsContextProvider = (props) => {
         const filteredIngredients = ingredients.filter(ingredient => ingredient.id !== id);
         const newList = [
             ...filteredIngredients,
-            { id: id || uuidv4(), name, quantity, measurement, timeStamp: timeStampTest },
+            { id: id || uuidv4(), name, quantity, measurement, timeStamp: timeStampTest, editing: false },
         ];
-        console.log('NEW LIST');
-
-        console.log(newList);
-
         const sortedArr = newList.sort((a, b) => a.timeStamp - b.timeStamp);
-        console.log('SORTED BY DATE');
-
-        console.log(sortedArr);
-
         setIngredients([
             ...sortedArr
         ])
+        console.log('ingredient list: ', sortedArr);
+
     };
 
-    const setEditing = (id) => {
-
+    const editIngredient = (ingredient) => {
+        const { id, name, quantity, measurement, timeStamp } = ingredient;
+        const filteredIngredients = ingredients.filter(ingredient => ingredient.id !== id);
+        const newList = [
+            ...filteredIngredients,
+            { id, name, quantity, measurement, timeStamp, editing: true },
+        ];
+        const sortedArr = newList.sort((a, b) => a.timeStamp - b.timeStamp);
+        setIngredients([
+            ...sortedArr
+        ])
     }
 
     const removeIngredient = (id) => {
@@ -49,7 +52,7 @@ const IngredientsContextProvider = (props) => {
 
 
     return (
-        <IngredientsContext.Provider value={{ ingredients, addIngredient, removeIngredient, saveIngredient }}>
+        <IngredientsContext.Provider value={{ ingredients, addIngredient, removeIngredient, saveIngredient, editIngredient }}>
             {props.children}
         </IngredientsContext.Provider>
     )
