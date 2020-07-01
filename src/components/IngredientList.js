@@ -2,9 +2,17 @@ import React, { useContext } from 'react';
 import Ingredient from './Ingredient';
 import IngredientForm from './IngredientForm';
 import { IngredientsContext } from '../context/IngredientsContext';
+import { RecipesContext } from '../context/RecipesContext';
 
 export const IngredientList = () => {
   const { ingredients } = useContext(IngredientsContext);
+  const { getRecipes } = useContext(RecipesContext);
+
+  const getNewRecipes = async () => {
+    const recipes = await getRecipes(ingredients);
+    console.log(recipes);
+
+  }
 
   return (
     <div>
@@ -28,6 +36,7 @@ export const IngredientList = () => {
           </div>
         )}
       <IngredientForm />
+      <button onClick={getNewRecipes}>Search</button>
     </div>
   );
 };

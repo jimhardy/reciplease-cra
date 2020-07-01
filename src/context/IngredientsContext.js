@@ -5,12 +5,6 @@ import axios from 'axios';
 // import ingredientsDb from '../localDataSources/ingredientsDb';
 export const IngredientsContext = createContext();
 
-require('dotenv').config();
-
-console.log(process.env.REACT_APP_SPOON_APIKEY);
-
-
-
 const IngredientsContextProvider = (props) => {
     const [ingredients, setIngredients] = useState([
         {

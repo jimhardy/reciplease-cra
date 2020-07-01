@@ -1,8 +1,9 @@
 import React, { useContext } from 'react';
 // import { Sidebar } from './Sidebar';
 import { IngredientList } from '../IngredientList';
-import IngredientsContextProvider, { IngredientsContext } from '../../context/IngredientsContext';
-
+import IngredientsContextProvider, {
+  IngredientsContext,
+} from '../../context/IngredientsContext';
 
 export const Content = () => {
   const { ingredients } = useContext(IngredientsContext);
