@@ -7,7 +7,6 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import RestaurantIcon from '@material-ui/icons/Restaurant';
 import { Tab, Tabs } from '@material-ui/core';
-// import IngredientsContextProvider, { IngredientsContext } from '../../context/IngredientsContext';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,7 +22,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 export const Nav = () => {
-  // const { ingredients } = useContext(IngredientsContext);
   const classes = useStyles();
 
   return (
