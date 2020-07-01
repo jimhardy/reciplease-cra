@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
 const IngredientForm = (props) => {
     const classes = useStyles();
     // const { name, quantity, measurement, id } = ingredient;
-    const { saveIngredient } = useContext(IngredientsContext);
+    const { saveIngredient, predictiveSearch } = useContext(IngredientsContext);
     const [ingredient, setIngredient] = useState({
         id: (props.ingredient && props.ingredient.id) || '',
         name: (props.ingredient && props.ingredient.name) || '',
@@ -28,6 +28,7 @@ const IngredientForm = (props) => {
     const handleChange = (e) => {
         const { name, value } = e.target;
         setIngredient({ ...ingredient, [name]: value });
+        predictiveSearch({ ...ingredient });
     };
 
     const handleSave = () => {

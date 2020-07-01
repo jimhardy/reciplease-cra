@@ -1,6 +1,7 @@
 import React, { createContext, useState } from 'react';
 import moment from 'moment';
-const { v4: uuidv4 } = require('uuid');
+import { v4 as uuidv4 } from 'uuid';
+import ingredientsDb from '../localDataSources/ingredientsDb';
 
 export const IngredientsContext = createContext();
 
@@ -19,19 +20,36 @@ const IngredientsContextProvider = (props) => {
 
     const saveIngredient = (ingredient) => {
         const { id, name, quantity, measurement, timeStamp } = ingredient;
-        const timeStampTest = timeStamp ? timeStamp : Date.now();
-        const filteredIngredients = ingredients.filter(ingredient => ingredient.id !== id);
-        const newList = [
-            ...filteredIngredients,
-            { id: id || uuidv4(), name, quantity, measurement, timeStamp: timeStampTest, editing: false },
-        ];
-        const sortedArr = newList.sort((a, b) => a.timeStamp - b.timeStamp);
-        setIngredients([
-            ...sortedArr
-        ])
-        console.log('ingredient list: ', sortedArr);
+        if (name) {
+            const timeStampTest = timeStamp ? timeStamp : Date.now();
+            const filteredIngredients = ingredients.filter(ingredient => ingredient.id !== id);
+            const newList = [
+                ...filteredIngredients,
+                { id: id || uuidv4(), name, quantity, measurement, timeStamp: timeStampTest, editing: false },
+            ];
+            const sortedArr = newList.sort((a, b) => a.timeStamp - b.timeStamp);
+            setIngredients([
+                ...sortedArr
+            ])
+            console.log('ingredient list: ', sortedArr);
+        } else {
+            // toast message?
+            console.log('No Ingredient!');
+        }
 
     };
+
+    const predictiveSearch = (event) => {
+        // console.log(event.name);
+        // console.log(ingredientsDb)
+        const matches = ingredientsDb.filter(ingredient => {
+            const regex = new RegExp(event.name, 'gi')
+            return ingredient.name.match(regex)
+        })
+        console.log(matches);
+        // look at wesbos javascript 30 predictive search
+        // feed in array of ingredients - local, but with an aim to populate with supermarket data
+    }
 
     const editIngredient = (ingredient) => {
         const { id, name, quantity, measurement, timeStamp } = ingredient;
@@ -52,7 +70,7 @@ const IngredientsContextProvider = (props) => {
 
 
     return (
-        <IngredientsContext.Provider value={{ ingredients, addIngredient, removeIngredient, saveIngredient, editIngredient }}>
+        <IngredientsContext.Provider value={{ ingredients, addIngredient, removeIngredient, saveIngredient, editIngredient, predictiveSearch }}>
             {props.children}
         </IngredientsContext.Provider>
     )
