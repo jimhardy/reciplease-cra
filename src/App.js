@@ -12,9 +12,7 @@ export const App = () => {
       <IngredientsContextProvider>
         <Header />
         <Content />
-
       </IngredientsContextProvider>
-
     </div>
   );
 };

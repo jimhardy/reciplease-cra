@@ -1,9 +1,13 @@
 import React, { createContext, useState } from 'react';
 import moment from 'moment';
 import { v4 as uuidv4 } from 'uuid';
-import ingredientsDb from '../localDataSources/ingredientsDb';
-
+import axios from 'axios';
+// import ingredientsDb from '../localDataSources/ingredientsDb';
 export const IngredientsContext = createContext();
+
+require('dotenv').config({ path: '../../.env' });
+
+
 
 const IngredientsContextProvider = (props) => {
     const [ingredients, setIngredients] = useState([
@@ -67,16 +71,17 @@ const IngredientsContextProvider = (props) => {
         }
     };
 
-    const predictiveSearch = (event) => {
-        // console.log(event.name);
-        // console.log(ingredientsDb)
-        const matches = ingredientsDb.filter(ingredient => {
-            const regex = new RegExp(event.name, 'gi')
-            return ingredient.name.match(regex)
-        })
-        console.log(matches);
-        // look at wesbos javascript 30 predictive search
-        // feed in array of ingredients - local, but with an aim to populate with supermarket data
+    const predictiveSearch = async (event) => {
+        try {
+            const config = {
+                method: 'get',
+                url: `https://api.spoonacular.com/food/ingredients/autocomplete?query=${event.name}&number=5&apiKey=0ea6a9bb907a4d3fad45ced7c63d4d1d`,
+            };
+            const response = await axios(config)
+            return response.data;
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     const editIngredient = (ingredient) => {

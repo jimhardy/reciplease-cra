@@ -25,11 +25,22 @@ const IngredientForm = (props) => {
         timeStamp: (props.ingredient && props.ingredient.timeStamp) || '',
     });
 
-    const handleChange = (e) => {
+    const [suggestions, setSuggestions] = useState({
+        suggestionsList: []
+    })
+
+    const handleChange = async (e) => {
         const { name, value } = e.target;
+        if (name === 'name') {
+            await predictiveSearch({ ...ingredient })
+                .then(arr => setSuggestions({ suggestionsList: arr }))
+        }
         setIngredient({ ...ingredient, [name]: value });
-        predictiveSearch({ ...ingredient });
     };
+
+    const handleSuggestionSelect = (e) => {
+        setIngredient({ ...ingredient, name: e.target.innerHTML });
+    }
 
     const handleSave = () => {
         saveIngredient({ ...ingredient });
@@ -40,10 +51,13 @@ const IngredientForm = (props) => {
             measurement: '',
             timeStamp: '',
         });
+        setSuggestions({
+            suggestionsList: []
+        })
     };
 
     return (
-        <li>
+        <div>
             <TextField
                 id="standard-basic"
                 label="name"
@@ -72,7 +86,12 @@ const IngredientForm = (props) => {
             />
 
             <button onClick={handleSave}>Save</button>
-        </li>
+            {suggestions.suggestionsList ?
+                <div>{suggestions.suggestionsList.map(suggestedIngredient => (
+                    <p onClick={handleSuggestionSelect}>{suggestedIngredient.name}</p>
+                ))}</div>
+                : null}
+        </div>
     );
 };
 
