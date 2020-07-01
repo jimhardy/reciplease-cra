@@ -5,7 +5,9 @@ import axios from 'axios';
 // import ingredientsDb from '../localDataSources/ingredientsDb';
 export const IngredientsContext = createContext();
 
-require('dotenv').config({ path: '../../.env' });
+require('dotenv').config();
+
+console.log(process.env.REACT_APP_SPOON_APIKEY);
 
 
 
@@ -75,7 +77,7 @@ const IngredientsContextProvider = (props) => {
         try {
             const config = {
                 method: 'get',
-                url: `https://api.spoonacular.com/food/ingredients/autocomplete?query=${event.name}&number=5&apiKey=0ea6a9bb907a4d3fad45ced7c63d4d1d`,
+                url: `https://api.spoonacular.com/food/ingredients/autocomplete?query=${event.name}&number=5&apiKey=${process.env.REACT_APP_SPOON_APIKEY}`,
             };
             const response = await axios(config)
             return response.data;
