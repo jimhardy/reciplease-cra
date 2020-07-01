@@ -1,6 +1,7 @@
 import React, { createContext, useState } from 'react';
 import moment from 'moment';
-const { v4: uuidv4 } = require('uuid');
+import { v4 as uuidv4 } from 'uuid';
+import ingredientsDb from '../localDataSources/ingredientsDb';
 
 export const IngredientsContext = createContext();
 
@@ -66,6 +67,18 @@ const IngredientsContextProvider = (props) => {
         }
     };
 
+    const predictiveSearch = (event) => {
+        // console.log(event.name);
+        // console.log(ingredientsDb)
+        const matches = ingredientsDb.filter(ingredient => {
+            const regex = new RegExp(event.name, 'gi')
+            return ingredient.name.match(regex)
+        })
+        console.log(matches);
+        // look at wesbos javascript 30 predictive search
+        // feed in array of ingredients - local, but with an aim to populate with supermarket data
+    }
+
     const editIngredient = (ingredient) => {
         const { id, name, quantity, measurement, timeStamp } = ingredient;
         const filteredIngredients = ingredients.filter(
@@ -84,15 +97,7 @@ const IngredientsContextProvider = (props) => {
     };
 
     return (
-        <IngredientsContext.Provider
-            value={{
-                ingredients,
-                addIngredient,
-                removeIngredient,
-                saveIngredient,
-                editIngredient,
-            }}
-        >
+        <IngredientsContext.Provider value={{ ingredients, addIngredient, removeIngredient, saveIngredient, editIngredient, predictiveSearch }}>
             {props.children}
         </IngredientsContext.Provider>
     );
