@@ -29,14 +29,16 @@ const IngredientForm = (props) => {
         suggestionsList: []
     })
 
-    const handleChange = async (e) => {
+    const handleChange = (e) => {
         const { name, value } = e.target;
-        if (name === 'name') {
-             predictiveSearch({ ...ingredient })
-                .then(arr => setSuggestions({ suggestionsList: arr }))
-        }
         setIngredient({ ...ingredient, [name]: value });
+        if (name === 'name') handleSuggestions(value);
     };
+
+    const handleSuggestions = async (name) => {
+        const list = await predictiveSearch(name)
+        name ? setSuggestions({ suggestionsList: list }) : setSuggestions({ suggestionsList: [] })
+    }
 
     const handleSuggestionSelect = (e) => {
         setIngredient({ ...ingredient, name: e.target.innerHTML });
