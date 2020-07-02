@@ -32,7 +32,7 @@ const IngredientForm = (props) => {
     const handleChange = async (e) => {
         const { name, value } = e.target;
         if (name === 'name') {
-            await predictiveSearch({ ...ingredient })
+             predictiveSearch({ ...ingredient })
                 .then(arr => setSuggestions({ suggestionsList: arr }))
         }
         setIngredient({ ...ingredient, [name]: value });
