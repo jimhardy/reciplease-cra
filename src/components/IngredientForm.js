@@ -42,6 +42,7 @@ const IngredientForm = (props) => {
 
     const handleSuggestionSelect = (e) => {
         setIngredient({ ...ingredient, name: e.target.innerHTML });
+        setSuggestions({ suggestionsList: [] });
     }
 
     const handleSave = () => {

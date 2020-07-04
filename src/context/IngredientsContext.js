@@ -9,7 +9,15 @@ const IngredientsContextProvider = (props) => {
     const [ingredients, setIngredients] = useState([
         {
             id: uuidv4(),
-            name: 'rice',
+            name: 'pasta',
+            quantity: 500,
+            measurement: 'grams',
+            editing: false,
+            timeStamp: 1593359651393,
+        },
+        {
+            id: uuidv4(),
+            name: 'cumin',
             quantity: 500,
             measurement: 'grams',
             editing: false,
@@ -17,12 +25,29 @@ const IngredientsContextProvider = (props) => {
         },
         {
             id: uuidv4(),
-            name: 'pasta',
+            name: 'peppers',
             quantity: 500,
             measurement: 'grams',
             editing: false,
             timeStamp: 1593359651393,
         },
+        {
+            id: uuidv4(),
+            name: 'courgette',
+            quantity: 500,
+            measurement: 'grams',
+            editing: false,
+            timeStamp: 1593359651392,
+        },
+        {
+            id: uuidv4(),
+            name: 'chicken',
+            quantity: 500,
+            measurement: 'grams',
+            editing: false,
+            timeStamp: 1593359651393,
+        },
+
     ]);
 
     const addIngredient = (name, quantity, measurement) => {

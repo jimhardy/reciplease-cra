@@ -9,7 +9,7 @@ export const RecipesContext = createContext();
 
 const RecipesContextProvider = (props) => {
     const { ingredients } = useContext(IngredientsContext);
-    const [recipes, setRecipes] = useState([{}])
+    const [recipes, setRecipes] = useState([])
 
     const getRecipes = async (ingredients) => {
         const query = ingredients.map(ingredient => {
@@ -20,9 +20,10 @@ const RecipesContextProvider = (props) => {
         try {
             const config = {
                 method: 'get',
-                url: `https://api.spoonacular.com/recipes/findByIngredients?ingredients=${query.toString()}&number=2&apiKey=${process.env.REACT_APP_SPOON_APIKEY}`,
+                url: `https://api.spoonacular.com/recipes/findByIngredients?ingredients=${query.toString()}&number=10&apiKey=${process.env.REACT_APP_SPOON_APIKEY}`,
             };
             const response = await axios(config)
+            setRecipes([...response.data]);
             return response.data;
         } catch (error) {
             console.log(error);
